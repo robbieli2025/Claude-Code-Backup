@@ -14,4 +14,4 @@ metadata:
 
 **Why:** 之前出现过3处重复——Cat Cough After Running 和 AeroKat vs Neobay 共用同一张封面图；Asthma vs Hairball 和 Train Cat Inhaler Mask 的封面图与自身 body 内嵌图相同。Robbie 要求所有封面图必须独特，不能"用过"。
 
-**How to apply:** 发布新文章前，必须用新下载的图片作为封面图（不能复用 Unsplash 同一 photo ID）。上传封面图后，用 MD5 hash 对比全站所有图片（featured + body），确认无重复后再发布。同时检查 body 内嵌图片是否与封面图重复。
+**How to apply:** 发布新文章前，必须用全新生成的图片作为封面图（不能复用 LinkFox AI 同一张生成结果）。上传封面图后，用 MD5 hash 对比全站所有图片（featured + body），确认无重复后再发布。同时检查 body 内嵌图片是否与封面图重复。

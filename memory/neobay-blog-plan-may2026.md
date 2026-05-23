@@ -95,7 +95,8 @@ originSessionId: 8e6e316d-6dab-4894-86f1-6bcab0f86270
 
 ## 写作规范
 
-- Hero image: 1200x675，从 Unsplash 下载，通过 Shopify Files (stagedUploadsCreate) 上传，用 CDN URL 设置 article.image.src
+- Hero image: 1200×675 (16:9)，LinkFox AI `@AI绘图` 生图 → crop → Shopify REST API base64 上传，WebP 格式
+- Body images: 1200×675 (16:9)，LinkFox AI 生成，WebP 格式，受 theme CSS max-width:1064px / max-height:598px 约束
 - Alt text: 描述性英文，与文章主题相关
 - Product card 占位符: `%%bpc:ID%%`（ID 需与 article.json 中 blog-product-card block 的 placeholder_id 一致）
 - 内链: 按 `references/internal-linking.md` 的 Cluster 矩阵和 6 条规则执行，每篇至少 3 个内链 + 产品页

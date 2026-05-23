@@ -1,0 +1,40 @@
+{
+  "type": "product_card",
+  "name": "Product card",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "在文章正文中插入占位符 [product-card:你填的ID]，发布后会被替换成产品卡。每个 block 的 ID 必须唯一。"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_id",
+      "label": "占位符 ID",
+      "info": "例如填 card-1，正文中写 [product-card:card-1]",
+      "default": "card-1"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "text",
+      "id": "highlights",
+      "label": "Feature Highlights",
+      "info": "可选，单行卖点。如：✔ 11-speed  ✔ 5.3QT  ✔ Touchscreen"
+    },
+    {
+      "type": "text",
+      "id": "learn_more_label",
+      "label": "Learn More 按钮文字",
+      "default": "Learn More"
+    },
+    {
+      "type": "text",
+      "id": "atc_label",
+      "label": "Add to Cart 按钮文字",
+      "default": "Add to Cart"
+    }
+  ]
+}

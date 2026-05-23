@@ -1,0 +1,13 @@
+# Exclude sensitive data
+settings.local.json
+.env
+*.env
+
+# Exclude personal/private files
+**/secrets*
+**/credentials*
+**/token*
+
+# Exclude large generated files
+node_modules/
+.DS_Store

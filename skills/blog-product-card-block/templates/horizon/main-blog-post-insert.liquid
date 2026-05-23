@@ -1,0 +1,34 @@
+{% comment %}
+  =====================================================================
+  Horizon 博客产品卡：在 main-blog-post.liquid section 层完成占位符替换，
+  直接输出文章内容，不走 content_for 渲染子 block。
+
+  原因（三层陷阱，Neobay 2026-05 踩坑 6 次总结）：
+  1. content_for 创建隔离作用域 → capture 变量无法传递到子 block
+  2. 子 block 的 section.blocks 只有自身 → 无法遍历其他 block
+  3. @theme 类型 block 运行时不携带 settings → section.blocks 遍历
+     也拿不到 placeholder_id 和 product
+
+  正确做法：在 main-blog-post.liquid 的 content_for 正文位置，
+  替换为以下代码（article-process snippet 使用硬编码映射，
+  不依赖 section.blocks）：
+
+    {%- liquid
+      assign article_content_processed = article.content
+      capture article_content_processed
+        render 'blog-product-card-article-process', article_html: article.content
+      endcapture
+    -%}
+    <div class="blog-post-content rte">
+      {{ 'blog-product-card.css' | asset_url | stylesheet_tag }}
+      <rte-formatter>
+        {{- article_content_processed -}}
+      </rte-formatter>
+    </div>
+
+  这段代码替换原来的：
+    {%- content_for 'block', id: 'blog-post-content', type: '_blog-post-content' %}
+
+  _blog-post-content.liquid 恢复为简单输出 block（仅作 article.json 占位注册）。
+  =====================================================================
+{% endcomment %}

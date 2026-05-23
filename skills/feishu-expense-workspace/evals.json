@@ -1,0 +1,23 @@
+{
+  "skill_name": "feishu-expense",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "这是我的 Shopify 这个月的扣费截图，帮我录入费用台账",
+      "expected_output": "提取金额/日期/服务商/费用名称，查 Robbie 白名单验证 Shopify 在白名单内，展示确认表格，等待用户确认",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "这张截图里有三笔扣款：Shopify $29、Cursor $20、Netflix $15.99，帮我报销",
+      "expected_output": "提取三笔费用，Shopify和Cursor在白名单内通过，Netflix不在白名单内需提示用户，逐条确认后录入",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "这个银行扣款记录帮我记一下，但是日期有点看不清，你帮我看看",
+      "expected_output": "日期不清晰时不猜测，主动询问用户补充日期信息",
+      "files": []
+    }
+  ]
+}

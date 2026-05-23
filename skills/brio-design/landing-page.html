@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brio — Clean Water, Designed Better</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2/src/thin/style.css">
+<style>
+/* ═══════════════════════════════════════════
+   BRIO DESIGN SYSTEM — TOKENS
+   ═══════════════════════════════════════════ */
+
+[data-theme="light"] {
+  --background: #F5F6F6;
+  --bg: var(--background);
+  --surface1: #FFFFFF;
+  --surface2: #EBECEC;
+  --surface3: #D5D8DA;
+  --border: #D5D8DA;
+  --border-visible: #C5C8D1;
+  --text1: #202223;
+  --text2: #6D7175;
+  --text3: #9EA3AA;
+  --text4: #C5C8D1;
+  --accent: #3C69B1;
+  --accent-subtle: #EBF2FA;
+  --success: #1B9500;
+  --success-bg: #E8F8E8;
+  --warning: #C48A00;
+  --warning-bg: #FFF8E8;
+  --error: #D3002F;
+  --error-bg: #FDE8E8;
+}
+
+[data-theme="dark"] {
+  --background: #0E2130;
+  --bg: var(--background);
+  --surface1: #0B1A26;
+  --surface2: #08131C;
+  --surface3: #060D14;
+  --border: #08131C;
+  --border-visible: #0B1A26;
+  --text1: #F5F6F6;
+  --text2: #9EA3AA;
+  --text3: #6D7175;
+  --text4: #C5C8D1;
+  --accent: #6FCFEB;
+  --accent-subtle: #08131C;
+  --success: #1B9500;
+  --success-bg: #0B1A26;
+  --warning: #C48A00;
+  --warning-bg: #0B1A26;
+  --error: #D3002F;
+  --error-bg: #0B1A26;
+}
+
+:root {
+  --font-display: "Inter", Helvetica, Arial, sans-serif;
+  --font-body: "Inter", Helvetica, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", Menlo, Monaco, monospace;
+
+  --text-display: 48px;
+  --text-heading: 32px;
+  --text-subheading: 22px;
+  --text-body: 15px;
+  --text-body-sm: 13px;
+  --text-caption: 12px;
+  --text-label: 11px;
+
+  --space-2xs: 2px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+
+  --radius-element: 2px;
+  --radius-control: 4px;
+  --radius-component: 16px;
+  --radius-container: 20px;
+  --radius-pill: 999px;
+
+  --ease-fast: ease-in-out;
+  --ease-medium: ease-in-out;
+  --duration-fast: 150ms;
+  --duration-medium: 300ms;
+  --duration-slow: 500ms;
+}
+
+/* ═══════════════════════════════════════════
+   RESET & BASE
+   ═══════════════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text1);
+  background: var(--background);
+  transition: background var(--duration-medium) var(--ease-medium), color var(--duration-medium) var(--ease-medium);
+}
+
+img { display: block; max-width: 100%; }
+
+a { color: var(--accent); text-decoration: none; transition: color var(--duration-fast) var(--ease-fast); }
+a:hover { color: var(--text1); }
+
+/* ═══════════════════════════════════════════
+   NAVIGATION
+   ═══════════════════════════════════════════ */
+
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--surface1);
+  border-bottom: 1px solid var(--border);
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--space-lg);
+  transition: background var(--duration-medium) var(--ease-medium), border-color var(--duration-medium) var(--ease-medium);
+}
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 22px;
+  color: var(--text1); letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+.nav-links { display: flex; align-items: center; gap: var(--space-lg); }
+.nav-links a {
+  font-size: var(--text-body); font-weight: 400;
+  color: var(--text2); text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-fast);
+}
+.nav-links a:hover { color: var(--accent); }
+
+.nav-actions { display: flex; align-items: center; gap: var(--space-md); }
+.nav-icon {
+  width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+  color: var(--text2); border-radius: var(--radius-control);
+  transition: color var(--duration-fast) var(--ease-fast), background var(--duration-fast) var(--ease-fast);
+  cursor: pointer; background: none; border: none; font-size: 20px;
+}
+.nav-icon:hover { color: var(--text1); background: var(--surface2); }
+
+.cart-badge {
+  position: relative;
+}
+.cart-badge::after {
+  content: '2'; position: absolute; top: 2px; right: 2px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--accent); color: #FFFFFF;
+  font-size: 10px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ═══════════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════════ */
+
+.hero {
+  position: relative;
+  min-height: 80vh;
+  display: flex; align-items: center;
+  padding: var(--space-3xl) var(--space-lg);
+  overflow: hidden;
+  background: var(--background);
+}
+
+.hero-inner {
+  max-width: 1200px; margin: 0 auto; width: 100%;
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3xl); align-items: center;
+}
+
+.hero-text { max-width: 520px; }
+
+.hero-tag {
+  display: inline-block;
+  font-size: var(--text-label); font-weight: 500;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: var(--space-md);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: var(--text-display); font-weight: 700;
+  line-height: 1.1; letter-spacing: -0.02em;
+  color: var(--text1); margin-bottom: var(--space-lg);
+}
+
+.hero-subtitle {
+  font-size: var(--text-body); line-height: 1.6;
+  color: var(--text2); margin-bottom: var(--space-xl);
+  max-width: 440px;
+}
+
+.hero-actions { display: flex; gap: var(--space-md); flex-wrap: wrap; }
+
+.hero-visual {
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+
+.hero-product {
+  width: 100%; max-width: 480px;
+  aspect-ratio: 3/4;
+  background: var(--surface1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-component);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  transition: border-color var(--duration-medium) var(--ease-medium), background var(--duration-medium) var(--ease-medium);
+}
+
+.hero-product-placeholder {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: var(--space-md); color: var(--text3);
+}
+
+.hero-product-placeholder i { font-size: 64px; color: var(--accent); opacity: 0.4; }
+.hero-product-placeholder span { font-size: var(--text-body-sm); }
+
+/* ═══════════════════════════════════════════
+   BUTTONS
+   ═══════════════════════════════════════════ */
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-sm);
+  font-family: var(--font-body); font-size: var(--text-body); font-weight: 400;
+  border: none; border-radius: var(--radius-control);
+  cursor: pointer; text-decoration: none;
+  transition: all var(--duration-fast) var(--ease-fast);
+  line-height: 1;
+}
+.btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.btn-primary {
+  background: var(--text1); color: #FFFFFF;
+  height: 44px; padding: 0 var(--space-lg);
+}
+.btn-primary:hover { background: #3B3D41; }
+[data-theme="dark"] .btn-primary:hover { background: var(--surface3); }
+
+.btn-secondary {
+  background: transparent; color: var(--text1);
+  border: 2px solid var(--text1);
+  height: 44px; padding: 0 var(--space-lg);
+}
+.btn-secondary:hover { background: var(--text1); color: #FFFFFF; }
+
+.btn-ghost {
+  background: transparent; color: var(--accent);
+  height: 36px; padding: 0 var(--space-md);
+}
+.btn-ghost:hover { background: var(--accent-subtle); }
+
+/* ═══════════════════════════════════════════
+   SECTION SHARED
+   ═══════════════════════════════════════════ */
+
+.section {
+  padding: var(--space-4xl) var(--space-lg);
+  max-width: 1200px; margin: 0 auto;
+}
+
+.section-label {
+  font-size: var(--text-label); font-weight: 500;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: var(--space-sm);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: var(--text-heading); font-weight: 700;
+  line-height: 1.2; letter-spacing: -0.01em;
+  color: var(--text1); margin-bottom: var(--space-lg);
+}
+
+.section-desc {
+  font-size: var(--text-body); color: var(--text2);
+  max-width: 560px; line-height: 1.6; margin-bottom: var(--space-2xl);
+}
+
+/* ═══════════════════════════════════════════
+   FEATURES — WHY BRIO
+   ═══════════════════════════════════════════ */
+
+.features-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg);
+}
+
+.feature-card {
+  background: var(--surface1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-component);
+  padding: var(--space-lg);
+  transition: border-color var(--duration-fast) var(--ease-fast), background var(--duration-medium) var(--ease-medium);
+}
+.feature-card:hover { border-color: var(--border-visible); }
+
+.feature-icon {
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent); font-size: 24px;
+  margin-bottom: var(--space-md);
+  background: var(--accent-subtle);
+  border-radius: var(--radius-control);
+}
+
+.feature-card h3 {
+  font-size: var(--text-body); font-weight: 500;
+  color: var(--text1); margin-bottom: var(--space-sm);
+}
+
+.feature-card p {
+  font-size: var(--text-body-sm); color: var(--text2); line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════════
+   PRODUCT SHOWCASE
+   ═══════════════════════════════════════════ */
+
+.products-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg);
+}
+
+.product-card {
+  background: var(--surface1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-component);
+  overflow: hidden;
+  transition: border-color var(--duration-fast) var(--ease-fast), background var(--duration-medium) var(--ease-medium);
+}
+.product-card:hover { border-color: var(--border-visible); }
+
+.product-image {
+  aspect-ratio: 4/3;
+  background: var(--surface2);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  transition: background var(--duration-medium) var(--ease-medium);
+}
+
+.product-image-placeholder {
+  display: flex; flex-direction: column; align-items: center; gap: var(--space-sm); color: var(--text3);
+}
+.product-image-placeholder i { font-size: 48px; opacity: 0.3; }
+.product-image-placeholder span { font-size: var(--text-caption); }
+
+.product-tag {
+  position: absolute; top: var(--space-sm); right: var(--space-sm);
+  font-size: var(--text-label); font-weight: 500;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-control);
+}
+
+.tag-sale { background: var(--error-bg); color: var(--error); }
+.tag-new { background: var(--accent-subtle); color: var(--accent); }
+.tag-instock { background: var(--success-bg); color: var(--success); }
+
+.product-info { padding: var(--space-md); }
+
+.product-name {
+  font-size: var(--text-body); font-weight: 500;
+  color: var(--text1); margin-bottom: var(--space-xs);
+}
+
+.product-price-row {
+  display: flex; align-items: baseline; gap: var(--space-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.product-price {
+  font-size: var(--text-subheading); font-weight: 700;
+  color: var(--text1);
+}
+
+.product-compare {
+  font-size: var(--text-body-sm); color: var(--text3);
+  text-decoration: line-through;
+}
+
+.product-desc {
+  font-size: var(--text-body-sm); color: var(--text2); line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════════
+   PRODUCT DETAIL — Z-PATTERN
+   ═══════════════════════════════════════════ */
+
+.product-detail {
+  padding: var(--space-4xl) var(--space-lg);
+  max-width: 1200px; margin: 0 auto;
+}
+
+.product-detail-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3xl); align-items: start;
+}
+
+.product-detail-image {
+  aspect-ratio: 1/1;
+  background: var(--surface1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-component);
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color var(--duration-medium) var(--ease-medium), background var(--duration-medium) var(--ease-medium);
+}
+
+.product-detail-image .product-image-placeholder i { font-size: 80px; }
+
+.product-detail-content { padding-top: var(--space-lg); }
+
+.product-detail-content h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-heading); font-weight: 700;
+  line-height: 1.2; color: var(--text1);
+  margin-bottom: var(--space-sm);
+}
+
+.product-detail-price {
+  font-size: var(--text-heading); font-weight: 700;
+  color: var(--text1); margin-bottom: var(--space-lg);
+}
+
+.product-detail-desc {
+  font-size: var(--text-body); color: var(--text2);
+  line-height: 1.6; margin-bottom: var(--space-xl);
+  max-width: 440px;
+}
+
+.spec-list {
+  display: flex; flex-direction: column; gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.spec-item {
+  display: flex; justify-content: space-between;
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--border);
+  font-size: var(--text-body-sm);
+  transition: border-color var(--duration-medium) var(--ease-medium);
+}
+
+.spec-label { color: var(--text2); }
+.spec-value { color: var(--text1); font-weight: 500; }
+
+.product-detail-actions {
+  display: flex; gap: var(--space-md); align-items: center;
+}
+
+/* ═══════════════════════════════════════════
+   TESTIMONIALS
+   ═══════════════════════════════════════════ */
+
+.testimonials-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg);
+}
+
+.testimonial-card {
+  background: var(--surface1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-component);
+  padding: var(--space-lg);
+  display: flex; flex-direction: column;
+  transition: border-color var(--duration-fast) var(--ease-fast), background var(--duration-medium) var(--ease-medium);
+}
+
+.testimonial-stars {
+  display: flex; gap: 2px; margin-bottom: var(--space-md);
+  color: #C48A00; font-size: 14px;
+}
+
+.testimonial-text {
+  font-size: var(--text-body); color: var(--text1);
+  line-height: 1.6; margin-bottom: var(--space-lg);
+  flex: 1;
+}
+
+.testimonial-author {
+  display: flex; align-items: center; gap: var(--space-md);
+  margin-top: auto;
+}
+
+.testimonial-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--surface2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 500; color: var(--text2);
+  transition: background var(--duration-medium) var(--ease-medium);
+}
+
+.testimonial-meta { display: flex; flex-direction: column; }
+.testimonial-name { font-size: var(--text-body-sm); font-weight: 500; color: var(--text1); }
+.testimonial-date { font-size: var(--text-caption); color: var(--text3); }
+
+/* ═══════════════════════════════════════════
+   FAQ ACCORDION
+   ═══════════════════════════════════════════ */
+
+.faq-list {
+  max-width: 720px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-component);
+  overflow: hidden;
+  transition: border-color var(--duration-medium) var(--ease-medium);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--border);
+  transition: border-color var(--duration-medium) var(--ease-medium);
+}
+.faq-item:last-child { border-bottom: none; }
+
+.faq-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: var(--space-md) var(--space-lg);
+  cursor: pointer; background: var(--surface1);
+  font-size: var(--text-body); font-weight: 500; color: var(--text1);
+  transition: background var(--duration-fast) var(--ease-fast), color var(--duration-fast) var(--ease-fast);
+}
+.faq-header:hover { background: var(--surface2); }
+
+.faq-icon {
+  font-size: 20px; color: var(--text2);
+  transition: transform var(--duration-medium) var(--ease-medium);
+}
+.faq-item.open .faq-icon { transform: rotate(180deg); }
+
+.faq-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height var(--duration-medium) var(--ease-medium);
+}
+
+.faq-item.open .faq-body { max-height: 200px; }
+
+.faq-body-inner {
+  padding: 0 var(--space-lg) var(--space-md);
+  font-size: var(--text-body-sm); color: var(--text2); line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════════
+   CTA BANNER
+   ═══════════════════════════════════════════ */
+
+.cta-banner {
+  padding: var(--space-4xl) var(--space-lg);
+  background: var(--surface1);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: background var(--duration-medium) var(--ease-medium), border-color var(--duration-medium) var(--ease-medium);
+}
+
+.cta-inner {
+  max-width: 720px; margin: 0 auto; text-align: center;
+}
+
+.cta-banner h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-heading); font-weight: 700;
+  line-height: 1.2; color: var(--text1);
+  margin-bottom: var(--space-md);
+}
+
+.cta-banner p {
+  font-size: var(--text-body); color: var(--text2);
+  line-height: 1.6; margin-bottom: var(--space-xl);
+}
+
+.cta-actions { display: flex; justify-content: center; gap: var(--space-md); flex-wrap: wrap; }
+
+/* ═══════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════ */
+
+.footer {
+  padding: var(--space-3xl) var(--space-lg) var(--space-xl);
+  background: var(--background);
+  transition: background var(--duration-medium) var(--ease-medium);
+}
+
+.footer-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--space-2xl);
+}
+
+.footer-brand h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-subheading); font-weight: 700;
+  color: var(--text1); margin-bottom: var(--space-sm);
+}
+
+.footer-brand p {
+  font-size: var(--text-body-sm); color: var(--text2);
+  line-height: 1.5; max-width: 280px;
+}
+
+.footer-col h4 {
+  font-size: var(--text-label); font-weight: 500;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--text2); margin-bottom: var(--space-md);
+}
+
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: var(--space-sm); }
+.footer-col a {
+  font-size: var(--text-body-sm); color: var(--text2);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-fast);
+}
+.footer-col a:hover { color: var(--accent); }
+
+.footer-bottom {
+  max-width: 1200px; margin: var(--space-xl) auto 0;
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+  transition: border-color var(--duration-medium) var(--ease-medium);
+}
+
+.footer-copy {
+  font-size: var(--text-caption); color: var(--text3);
+}
+
+.footer-socials { display: flex; gap: var(--space-sm); }
+.footer-socials a {
+  width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+  color: var(--text2); border-radius: var(--radius-control);
+  transition: color var(--duration-fast) var(--ease-fast), background var(--duration-fast) var(--ease-fast);
+  font-size: 20px; text-decoration: none;
+}
+.footer-socials a:hover { color: var(--text1); background: var(--surface2); }
+
+/* ═══════════════════════════════════════════
+   THEME TOGGLE (floating)
+   ═══════════════════════════════════════════ */
+
+.theme-toggle {
+  position: fixed; bottom: var(--space-lg); right: var(--space-lg);
+  z-index: 999;
+  display: flex; align-items: center; gap: var(--space-sm);
+  background: var(--surface1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  padding: var(--space-xs) var(--space-md);
+  font-family: var(--font-body);
+  font-size: var(--text-caption); color: var(--text2);
+  cursor: pointer;
+  transition: background var(--duration-medium) var(--ease-medium), border-color var(--duration-medium) var(--ease-medium), color var(--duration-fast) var(--ease-fast);
+  box-shadow: none;
+}
+.theme-toggle:hover { border-color: var(--border-visible); color: var(--text1); }
+.theme-toggle i { font-size: 16px; }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; text-align: center; }
+  .hero-text { max-width: 100%; }
+  .hero-subtitle { max-width: 100%; }
+  .hero-actions { justify-content: center; }
+  .hero-visual { order: -1; }
+  .hero-product { max-width: 360px; margin: 0 auto; }
+
+  .features-grid,
+  .products-grid,
+  .testimonials-grid { grid-template-columns: 1fr; }
+
+  .product-detail-grid { grid-template-columns: 1fr; }
+  .product-detail-content { padding-top: 0; }
+
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  .hero-title { font-size: 36px; }
+  .footer-inner { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: var(--space-sm); text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════ NAVIGATION ════════════ -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Brio</a>
+  <div class="nav-links">
+    <a href="#products">Products</a>
+    <a href="#features">Why Brio</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#faq">Support</a>
+  </div>
+  <div class="nav-actions">
+    <button class="nav-icon" aria-label="Search"><i class="ph thin ph-magnifying-glass"></i></button>
+    <button class="nav-icon cart-badge" aria-label="Cart"><i class="ph thin ph-shopping-bag"></i></button>
+  </div>
+</nav>
+
+<!-- ════════════ HERO ════════════ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-tag">New Collection 2026</div>
+      <h1 class="hero-title">Water, the way it should be.</h1>
+      <p class="hero-subtitle">Brio water coolers deliver clean, perfectly tempered water — hot, cold, or room — without the noise, hassle, or plastic waste of bottled delivery.</p>
+      <div class="hero-actions">
+        <a href="#products" class="btn btn-primary">Shop Now</a>
+        <a href="#features" class="btn btn-secondary">Learn More</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-product">
+        <div class="hero-product-placeholder">
+          <i class="ph thin ph-drop"></i>
+          <span>Product photography placeholder<br>Replace with Brio hero shot</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ FEATURES ════════════ -->
+<section class="section" id="features">
+  <div class="section-label">Why Brio</div>
+  <h2 class="section-title">Engineered for everyday trust.</h2>
+  <p class="section-desc">Every detail — from the filtration to the finish — is designed so you never think about your water cooler. It just works.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon"><i class="ph thin ph-shield-check"></i></div>
+      <h3>Advanced Filtration</h3>
+      <p>Multi-stage carbon and sediment filters remove chlorine, lead, and microplastics. Independent lab tested to NSF standards.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><i class="ph thin ph-thermometer-simple"></i></div>
+      <h3>Three Temperatures</h3>
+      <p>Piping hot for tea, ice-cold for hydration, or room temp for cooking — all from one compact unit with instant dispensing.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><i class="ph thin ph-leaf"></i></div>
+      <h3>Zero Plastic Waste</h3>
+      <p>One Brio cooler eliminates over 1,200 single-use bottles per year. No delivery trucks, no storage, no waste.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><i class="ph thin ph-snowflake"></i></div>
+      <h3>Energy Efficient</h3>
+      <p> compressor cooling uses 40% less energy than traditional units. Sleep mode powers down during off-hours automatically.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><i class="ph thin ph-wrench"></i></div>
+      <h3>Easy Maintenance</h3>
+      <p>Self-cleaning UV technology and tool-free filter replacement. No technician visits, no complicated schedules.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><i class="ph thin ph-truck"></i></div>
+      <h3>Free Shipping & Returns</h3>
+      <p>Ships free in 2–5 business days. 30-day no-questions return policy. We even cover return shipping.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ PRODUCTS ════════════ -->
+<section class="section" id="products">
+  <div class="section-label">Our Collection</div>
+  <h2 class="section-title">Find your Brio.</h2>
+  <p class="section-desc">From compact countertop units to full-size freestanding coolers — there's a Brio for every space.</p>
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-image">
+        <span class="product-tag tag-sale">Sale</span>
+        <div class="product-image-placeholder">
+          <i class="ph thin ph-drop"></i>
+          <span>Product photo</span>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Brio Moderna Bottom-Load</div>
+        <div class="product-price-row">
+          <span class="product-price">$349</span>
+          <span class="product-compare">$429</span>
+        </div>
+        <div class="product-desc">Self-cleaning, three-temperature bottom-load cooler with child safety lock.</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-image">
+        <span class="product-tag tag-new">New</span>
+        <div class="product-image-placeholder">
+          <i class="ph thin ph-drop"></i>
+          <span>Product photo</span>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Brio Countertop Essential</div>
+        <div class="product-price-row">
+          <span class="product-price">$199</span>
+        </div>
+        <div class="product-desc">Compact countertop cooler with cold and room-temperature dispensing.</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-image">
+        <span class="product-tag tag-instock">In Stock</span>
+        <div class="product-image-placeholder">
+          <i class="ph thin ph-drop"></i>
+          <span>Product photo</span>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Brio Pro Series Top-Load</div>
+        <div class="product-price-row">
+          <span class="product-price">$499</span>
+        </div>
+        <div class="product-desc">Commercial-grade top-load cooler for offices and high-traffic spaces.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ PRODUCT DETAIL (Z-PATTERN) ════════════ -->
+<section class="product-detail" id="detail">
+  <div class="product-detail-grid">
+    <div class="product-detail-image">
+      <div class="product-image-placeholder">
+        <i class="ph thin ph-drop"></i>
+        <span>Product detail photography placeholder</span>
+      </div>
+    </div>
+    <div class="product-detail-content">
+      <div class="section-label">Best Seller</div>
+      <h2>Brio Moderna Bottom-Load</h2>
+      <div class="product-detail-price">$349</div>
+      <p class="product-detail-desc">The Moderna combines Brio's most advanced filtration with a bottom-loading design that makes bottle changes effortless. Self-cleaning UV technology keeps water fresh between filter changes.</p>
+      <div class="spec-list">
+        <div class="spec-item">
+          <span class="spec-label">Temperatures</span>
+          <span class="spec-value">Hot / Cold / Room</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Capacity</span>
+          <span class="spec-value">5 gallons</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Filtration</span>
+          <span class="spec-value">Multi-stage carbon + sediment</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Self-cleaning</span>
+          <span class="spec-value">UV-C light</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Dimensions</span>
+          <span class="spec-value">41.5" x 13" x 12.5"</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Warranty</span>
+          <span class="spec-value">3-year limited</span>
+        </div>
+      </div>
+      <div class="product-detail-actions">
+        <button class="btn btn-primary">Add to Cart</button>
+        <button class="btn btn-secondary">View Full Specs</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ TESTIMONIALS ════════════ -->
+<section class="section" id="reviews">
+  <div class="section-label">Reviews</div>
+  <h2 class="section-title">Trusted in 50,000+ homes.</h2>
+  <p class="section-desc">Real feedback from Brio owners who made the switch from bottled water delivery.</p>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="testimonial-stars">
+        <i class="ph thin ph-star-fill"></i>
+        <i class="ph thin ph-star-fill"></i>
+        <i class="ph thin ph-star-fill"></i>
+        <i class="ph thin ph-star-fill"></i>
+        <i class="ph thin ph-star-fill"></i>
+      </div>
+      <p class="testimonial-text">"We canceled our bottled delivery after the first week. The water tastes just as good — probably better — and we're saving $40 a month."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">SK</div>
+        <div class="testimonial-meta">
+          <span class="testimonial-name">Sarah K.</span>
+          <span class="testimonial-date">Verified purchase · 3 months ago</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-stars">
+        <i class="ph thin ph-star-fill"></i>
+        <i class="ph thin ph-star-fill"></i>
+        <i class="ph thin ph-star-fill"></i>
+        <i class="ph thin ph-star-fill"></i>
+        <i class="ph thin ph-star-fill"></i>
+      </div>
+      <p class="testimonial-text">"The bottom-load design is a game changer. My wife can swap bottles without lifting anything over her head. Should have bought this years ago."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">MR</div>
+        <div class="testimonial-meta">
+          <span class="testimonial-name">Mike R.</span>
+          <span class="testimonial-date">Verified purchase · 6 months ago</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-stars">
+        <i class="ph thin ph-star-fill"></i>
+        <i class="ph thin ph-star-fill"></i>
+        <i class="ph thin ph-star-fill"></i>
+        <i class="ph thin ph-star-fill"></i>
+        <i class="ph thin ph-star-half"></i>
+      </div>
+      <p class="testimonial-text">"Quiet, clean, looks great in our kitchen. The hot water is instant for tea and oatmeal. My only regret is not getting the stainless finish."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">JL</div>
+        <div class="testimonial-meta">
+          <span class="testimonial-name">Jenny L.</span>
+          <span class="testimonial-date">Verified purchase · 1 month ago</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ FAQ ════════════ -->
+<section class="section" id="faq">
+  <div class="section-label">FAQ</div>
+  <h2 class="section-title">Common questions.</h2>
+  <p class="section-desc">Everything you need to know before making the switch.</p>
+  <div class="faq-list">
+    <div class="faq-item open">
+      <div class="faq-header" onclick="toggleFaq(this)">
+        How often do I need to replace the filter?
+        <i class="ph thin ph-caret-down faq-icon"></i>
+      </div>
+      <div class="faq-body">
+        <div class="faq-body-inner">Brio filters last approximately 6 months under normal use. The cooler will remind you with a filter-life indicator light. Replacement filters are $29.99 and take under 2 minutes to swap — no tools required.</div>
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-header" onclick="toggleFaq(this)">
+        Does it require a water line?
+        <i class="ph thin ph-caret-down faq-icon"></i>
+      </div>
+      <div class="faq-body">
+        <div class="faq-body-inner">No. Brio bottom-load and top-load coolers use standard 3 or 5-gallon water bottles. Simply place the bottle in the bottom compartment — no plumbing, no installation.</div>
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-header" onclick="toggleFaq(this)">
+        What's the return policy?
+        <i class="ph thin ph-caret-down faq-icon"></i>
+      </div>
+      <div class="faq-body">
+        <div class="faq-body-inner">30-day no-questions-asked returns. We provide a prepaid return label and issue a full refund within 5 business days of receiving the unit.</div>
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-header" onclick="toggleFaq(this)">
+        How loud is the compressor?
+        <i class="ph thin ph-caret-down faq-icon"></i>
+      </div>
+      <div class="faq-body">
+        <div class="faq-body-inner">Brio coolers operate at under 40 dB — quieter than a typical refrigerator. The compressor only runs when actively cooling, and sleep mode further reduces noise during off-hours.</div>
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-header" onclick="toggleFaq(this)">
+        Is the hot water child-safe?
+        <i class="ph thin ph-caret-down faq-icon"></i>
+      </div>
+      <div class="faq-body">
+        <div class="faq-body-inner">Yes. The hot water dispenser includes a two-step child safety lock that requires pressing and sliding simultaneously. The lock can also be fully disabled if not needed.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ CTA BANNER ════════════ -->
+<section class="cta-banner">
+  <div class="cta-inner">
+    <h2>Ready for better water?</h2>
+    <p>Join 50,000+ households who switched to Brio. Free shipping, 30-day returns, and a 3-year warranty on every unit.</p>
+    <div class="cta-actions">
+      <a href="#products" class="btn btn-primary">Shop All Coolers</a>
+      <a href="#detail" class="btn btn-secondary">Compare Models</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ FOOTER ════════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h3>Brio</h3>
+      <p>Clean water, designed better. Brio makes water coolers that belong in modern homes — not break rooms.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#">Bottom-Load Coolers</a></li>
+        <li><a href="#">Countertop Coolers</a></li>
+        <li><a href="#">Top-Load Coolers</a></li>
+        <li><a href="#">Replacement Filters</a></li>
+        <li><a href="#">Accessories</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#">Help Center</a></li>
+        <li><a href="#">Filter Replacement Guide</a></li>
+        <li><a href="#">Warranty Info</a></li>
+        <li><a href="#">Returns</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Brio</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2026 Brio Water. All rights reserved.</span>
+    <div class="footer-socials">
+      <a href="#" aria-label="Instagram"><i class="ph thin ph-instagram-logo"></i></a>
+      <a href="#" aria-label="Facebook"><i class="ph thin ph-facebook-logo"></i></a>
+      <a href="#" aria-label="YouTube"><i class="ph thin ph-youtube-logo"></i></a>
+      <a href="#" aria-label="Twitter"><i class="ph thin ph-x-logo"></i></a>
+    </div>
+  </div>
+</footer>
+
+<!-- ════════════ THEME TOGGLE ════════════ -->
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+  <i class="ph thin ph-sun"></i>
+  <span>Light / Dark</span>
+</button>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme');
+  const next = current === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('brio-theme', next);
+}
+
+(function() {
+  const saved = localStorage.getItem('brio-theme');
+  if (saved) document.documentElement.setAttribute('data-theme', saved);
+})();
+
+function toggleFaq(header) {
+  const item = header.parentElement;
+  const wasOpen = item.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  // Toggle clicked
+  if (!wasOpen) item.classList.add('open');
+}
+</script>
+
+</body>
+</html>

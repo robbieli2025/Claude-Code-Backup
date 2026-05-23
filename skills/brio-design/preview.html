@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brio — Design Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2/src/thin/style.css">
+<style>
+/* ═══════════════════════════════════════════
+   BRIO DESIGN SYSTEM — TOKENS
+   ═══════════════════════════════════════════ */
+
+[data-theme="light"] {
+  --background: #F5F6F6;
+  --bg: var(--background);
+  --surface1: #FFFFFF;
+  --surface2: #EBECEC;
+  --surface3: #D5D8DA;
+  --border: #D5D8DA;
+  --border-visible: #C5C8D1;
+  --text1: #202223;
+  --text2: #6D7175;
+  --text3: #9EA3AA;
+  --text4: #C5C8D1;
+  --accent: #3C69B1;
+  --accent-subtle: #EBF2FA;
+  --success: #1B9500;
+  --success-bg: #E8F8E8;
+  --warning: #C48A00;
+  --warning-bg: #FFF8E8;
+  --error: #D3002F;
+  --error-bg: #FDE8E8;
+  --shadow-1: none;
+  --shadow-2: none;
+  --shadow-3: none;
+}
+
+[data-theme="dark"] {
+  --background: #0E2130;
+  --bg: var(--background);
+  --surface1: #0B1A26;
+  --surface2: #08131C;
+  --surface3: #060D14;
+  --border: #08131C;
+  --border-visible: #0B1A26;
+  --text1: #F5F6F6;
+  --text2: #9EA3AA;
+  --text3: #6D7175;
+  --text4: #C5C8D1;
+  --accent: #6FCFEB;
+  --accent-subtle: #08131C;
+  --success: #1B9500;
+  --success-bg: #0B1A26;
+  --warning: #C48A00;
+  --warning-bg: #0B1A26;
+  --error: #D3002F;
+  --error-bg: #0B1A26;
+  --shadow-1: none;
+  --shadow-2: none;
+  --shadow-3: none;
+}
+
+:root {
+  --font-display: "Inter", Helvetica, Arial, sans-serif;
+  --font-body: "Inter", Helvetica, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", Menlo, Monaco, monospace;
+
+  --text-display: 48px;
+  --text-heading: 32px;
+  --text-subheading: 22px;
+  --text-body: 15px;
+  --text-body-sm: 13px;
+  --text-caption: 12px;
+  --text-label: 11px;
+
+  --space-2xs: 2px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+
+  --radius-cards: 16px;
+  --radius-buttons: 4px;
+  --radius-inputs: 4px;
+  --radius-tags: 999px;
+  --radius-modals: 20px;
+
+  --ease-fast: ease-in-out;
+  --ease-medium: ease-in-out;
+  --duration-fast: 150ms;
+  --duration-medium: 300ms;
+  --duration-slow: 500ms;
+}
+
+/* ═══════════════════════════════════════════
+   BASE
+   ═══════════════════════════════════════════ */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--background);
+  color: var(--text1);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  min-height: 100vh;
+  padding: var(--space-lg);
+  transition: background var(--duration-slow) var(--ease-medium),
+              color var(--duration-slow) var(--ease-medium);
+}
+
+/* ═══════════════════════════════════════════
+   GRID
+   ═══════════════════════════════════════════ */
+
+.grid {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 180px 220px 200px auto;
+  gap: var(--space-md);
+}
+
+.card {
+  background: var(--surface1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-cards);
+  padding: var(--space-lg);
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  transition: background var(--duration-medium) var(--ease-medium),
+              border-color var(--duration-medium) var(--ease-medium);
+}
+
+.card-label {
+  font-size: var(--text-caption);
+  font-weight: 500;
+  color: var(--text3);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-sm);
+}
+
+/* ═══════════════════════════════════════════
+   WIDGET 1 — HERO METRIC (2-col span)
+   ═══════════════════════════════════════════ */
+
+.widget-hero {
+  grid-column: span 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.widget-hero .big-number {
+  font-family: var(--font-display);
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--text1);
+  letter-spacing: -0.03em;
+}
+
+.widget-hero .big-unit {
+  font-size: var(--text-subheading);
+  font-weight: 400;
+  color: var(--text2);
+  margin-left: var(--space-xs);
+}
+
+.widget-hero .metric-detail {
+  text-align: right;
+}
+
+.widget-hero .metric-detail .delta {
+  font-size: var(--text-body-sm);
+  font-weight: 500;
+  color: var(--success);
+}
+
+.widget-hero .metric-detail .delta-label {
+  font-size: var(--text-caption);
+  color: var(--text3);
+  margin-top: 2px;
+}
+
+/* ═══════════════════════════════════════════
+   WIDGET 2 — FILTER STATUS
+   ═══════════════════════════════════════════ */
+
+.widget-filter {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.filter-ring-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.filter-ring {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 6px solid var(--surface3);
+  border-top-color: var(--accent);
+  border-right-color: var(--accent);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-ring-value {
+  font-family: var(--font-display);
+  font-size: var(--text-heading);
+  font-weight: 700;
+  color: var(--text1);
+}
+
+.filter-status-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--space-sm);
+}
+
+.filter-status-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: var(--text-caption);
+  color: var(--text2);
+}
+
+.filter-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.filter-dot.warning { background: var(--warning); }
+
+/* ═══════════════════════════════════════════
+   WIDGET 3 — TEMPERATURE
+   ═══════════════════════════════════════════ */
+
+.widget-temp {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.temp-display {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-xs);
+}
+
+.temp-value {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--text1);
+}
+
+.temp-deg {
+  font-size: var(--text-subheading);
+  color: var(--text2);
+}
+
+.temp-tabs {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.temp-tab {
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-buttons);
+  font-size: var(--text-caption);
+  font-weight: 500;
+  border: none;
+  cursor: default;
+  background: transparent;
+  color: var(--text3);
+}
+
+.temp-tab.active {
+  background: var(--accent-subtle);
+  color: var(--accent);
+}
+
+/* ═══════════════════════════════════════════
+   WIDGET 4 — USAGE SPARKLINE (2-col)
+   ═══════════════════════════════════════════ */
+
+.widget-usage {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.sparkline-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  flex: 1;
+  padding-top: var(--space-md);
+}
+
+.spark-bar {
+  flex: 1;
+  background: var(--accent);
+  border-radius: 2px 2px 0 0;
+  opacity: 0.7;
+  transition: opacity 150ms ease;
+}
+
+.spark-bar:hover { opacity: 1; }
+
+.spark-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-caption);
+  color: var(--text3);
+  margin-top: var(--space-xs);
+}
+
+/* ═══════════════════════════════════════════
+   WIDGET 5 — PRODUCT STATUS LIST
+   ═══════════════════════════════════════════ */
+
+.widget-products {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.product-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.product-item:last-child { border-bottom: none; }
+
+.product-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.product-info { flex: 1; min-width: 0; }
+
+.product-name {
+  font-size: var(--text-body-sm);
+  font-weight: 500;
+  color: var(--text1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-meta {
+  font-size: var(--text-caption);
+  color: var(--text3);
+}
+
+.product-tag {
+  font-size: var(--text-label);
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: var(--radius-tags);
+  background: var(--success-bg);
+  color: var(--success);
+  white-space: nowrap;
+}
+
+.product-tag.low {
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+
+/* ═══════════════════════════════════════════
+   WIDGET 6 — QUICK ACTIONS
+   ═══════════════════════════════════════════ */
+
+.widget-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-buttons);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text1);
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  cursor: default;
+  transition: background var(--duration-fast) var(--ease-fast),
+              border-color var(--duration-fast) var(--ease-fast);
+  width: 100%;
+  text-align: left;
+}
+
+.action-btn:hover {
+  background: var(--accent-subtle);
+  border-color: var(--accent);
+}
+
+.action-btn i {
+  font-size: 16px;
+  color: var(--accent);
+}
+
+/* ═══════════════════════════════════════════
+   WIDGET 7 — ORDER METRICS (2-col)
+   ═══════════════════════════════════════════ */
+
+.widget-orders {
+  grid-column: span 2;
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.order-metric {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.order-value {
+  font-family: var(--font-display);
+  font-size: var(--text-heading);
+  font-weight: 700;
+  color: var(--text1);
+  line-height: 1.2;
+}
+
+.order-delta {
+  font-size: var(--text-caption);
+  color: var(--success);
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.order-delta.negative { color: var(--error); }
+
+.order-label {
+  font-size: var(--text-caption);
+  color: var(--text3);
+  margin-top: var(--space-xs);
+}
+
+.order-divider {
+  width: 1px;
+  background: var(--border);
+  align-self: stretch;
+}
+
+/* ═══════════════════════════════════════════
+   WIDGET 8 — RECENT ACTIVITY
+   ═══════════════════════════════════════════ */
+
+.widget-activity {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.activity-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.activity-item:last-child { border-bottom: none; }
+
+.activity-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+.activity-dot.shipped { background: var(--success); }
+.activity-dot.pending { background: var(--warning); }
+.activity-dot.returned { background: var(--error); }
+
+.activity-text {
+  font-size: var(--text-body-sm);
+  color: var(--text1);
+  line-height: 1.4;
+}
+
+.activity-time {
+  font-size: var(--text-label);
+  color: var(--text3);
+  margin-top: 1px;
+}
+
+/* ═══════════════════════════════════════════
+   WIDGET 9 — TOKEN KEY
+   ═══════════════════════════════════════════ */
+
+.widget-tokens {
+  grid-column: span 2;
+}
+
+.token-swatches {
+  display: flex;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+}
+
+.swatch {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-buttons);
+  border: 1px solid var(--border);
+  position: relative;
+}
+
+.swatch::after {
+  content: attr(data-name);
+  position: absolute;
+  bottom: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px;
+  color: var(--text3);
+  white-space: nowrap;
+}
+
+.token-types {
+  display: flex;
+  gap: var(--space-lg);
+  align-items: baseline;
+  margin-top: var(--space-md);
+}
+
+.type-sample {
+  display: flex;
+  flex-direction: column;
+}
+
+.type-sample-label {
+  font-size: var(--text-label);
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 2px;
+}
+
+.type-sample-display {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text1);
+  line-height: 1.2;
+}
+
+.type-sample-body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--text1);
+  line-height: 1.5;
+}
+
+.type-sample-mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-body-sm);
+  color: var(--text2);
+}
+
+.token-spacing {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-top: var(--space-md);
+}
+
+.spacing-block {
+  height: 8px;
+  background: var(--accent);
+  border-radius: 1px;
+  opacity: 0.6;
+}
+
+.spacing-label {
+  font-size: var(--text-label);
+  color: var(--text3);
+  margin-left: var(--space-xs);
+}
+
+/* ═══════════════════════════════════════════
+   WIDGET 10 — SHIPPING PROGRESS
+   ═══════════════════════════════════════════ */
+
+.widget-shipping {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.progress-track {
+  height: 6px;
+  background: var(--surface3);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: var(--space-sm) 0;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 3px;
+  transition: width var(--duration-medium) var(--ease-medium);
+}
+
+.shipping-steps {
+  display: flex;
+  justify-content: space-between;
+}
+
+.shipping-step {
+  font-size: var(--text-label);
+  color: var(--text3);
+  text-align: center;
+}
+
+.shipping-step.done { color: var(--accent); }
+.shipping-step.current { color: var(--text1); font-weight: 500; }
+
+/* ═══════════════════════════════════════════
+   FLOATING BAR
+   ═══════════════════════════════════════════ */
+
+.floating-bar {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--surface1);
+  border: 1.5px solid var(--border);
+  box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.12);
+  transition: background 500ms ease, border-color 500ms ease;
+}
+
+.mode-btn {
+  height: 32px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 14px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text3);
+  transition: background 200ms ease, color 200ms ease;
+  outline: none;
+}
+
+.mode-btn:hover { color: var(--text1); }
+
+.mode-btn.active {
+  background: var(--surface3);
+  color: var(--text1);
+}
+
+.mode-btn i { font-size: 14px; }
+
+/* ═══════════════════════════════════════════
+   HEADER
+   ═══════════════════════════════════════════ */
+
+.preview-header {
+  max-width: 1120px;
+  margin: 0 auto var(--space-lg);
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+}
+
+.preview-title {
+  font-family: var(--font-display);
+  font-size: var(--text-heading);
+  font-weight: 700;
+  color: var(--text1);
+}
+
+.preview-subtitle {
+  font-size: var(--text-body-sm);
+  color: var(--text3);
+}
+</style>
+</head>
+<body>
+
+<div class="preview-header">
+  <span class="preview-title">Brio</span>
+  <span class="preview-subtitle">Design System Preview</span>
+</div>
+
+<div class="grid">
+
+  <!-- Widget 1: Hero Metric — Daily Water Output -->
+  <div class="card widget-hero">
+    <div>
+      <div class="card-label">Daily Output</div>
+      <div class="big-number">2,847<span class="big-unit">gal</span></div>
+    </div>
+    <div class="metric-detail">
+      <div class="delta">+12.4%</div>
+      <div class="delta-label">vs last week</div>
+    </div>
+  </div>
+
+  <!-- Widget 2: Filter Status Ring -->
+  <div class="card widget-filter">
+    <div class="card-label">Filter Life</div>
+    <div class="filter-ring-wrap">
+      <div class="filter-ring">
+        <span class="filter-ring-value">78%</span>
+      </div>
+    </div>
+    <div class="filter-status-row">
+      <div class="filter-status-item"><span class="filter-dot"></span> Cold — Good</div>
+      <div class="filter-status-item"><span class="filter-dot warning"></span> Hot — Replace soon</div>
+    </div>
+  </div>
+
+  <!-- Widget 3: Water Temperature -->
+  <div class="card widget-temp">
+    <div class="card-label">Dispenser Temp</div>
+    <div class="temp-display">
+      <span class="temp-value">44</span>
+      <span class="temp-deg">°F</span>
+    </div>
+    <div class="temp-tabs">
+      <span class="temp-tab active">Cold</span>
+      <span class="temp-tab">Hot</span>
+      <span class="temp-tab">Room</span>
+    </div>
+  </div>
+
+  <!-- Widget 4: Usage Sparkline (2-col) -->
+  <div class="card widget-usage">
+    <div class="card-label">Weekly Usage (gallons)</div>
+    <div class="sparkline-row" id="sparkline"></div>
+    <div class="spark-labels">
+      <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+    </div>
+  </div>
+
+  <!-- Widget 5: Product Status List -->
+  <div class="card widget-products">
+    <div class="card-label">Active Units</div>
+    <div class="product-item">
+      <div class="product-icon"><i class="ph thin ph-drop"></i></div>
+      <div class="product-info">
+        <div class="product-name">Brio Moderna</div>
+        <div class="product-meta">BPOUROSC — Kitchen</div>
+      </div>
+      <span class="product-tag">Online</span>
+    </div>
+    <div class="product-item">
+      <div class="product-icon"><i class="ph thin-drop"></i></div>
+      <div class="product-info">
+        <div class="product-name">Brio Premiere</div>
+        <div class="product-meta">BLKPOUROSC — Break Room</div>
+      </div>
+      <span class="product-tag low">Filter Low</span>
+    </div>
+    <div class="product-item">
+      <div class="product-icon"><i class="ph thin ph-drop"></i></div>
+      <div class="product-info">
+        <div class="product-name">Brio Altitude</div>
+        <div class="product-meta">BSESSBK — Lobby</div>
+      </div>
+      <span class="product-tag">Online</span>
+    </div>
+  </div>
+
+  <!-- Widget 6: Quick Actions -->
+  <div class="card widget-actions">
+    <div class="card-label">Quick Actions</div>
+    <button class="action-btn"><i class="ph thin ph-arrows-clockwise"></i> Reorder Filters</button>
+    <button class="action-btn"><i class="ph thin ph-wrench"></i> Schedule Service</button>
+    <button class="action-btn"><i class="ph thin ph-chart-line"></i> View Usage Report</button>
+    <button class="action-btn"><i class="ph thin ph-question"></i> Support</button>
+  </div>
+
+  <!-- Widget 7: Order Metrics (2-col) -->
+  <div class="card widget-orders">
+    <div class="order-metric">
+      <div class="card-label">Orders This Month</div>
+      <div class="order-value">1,284</div>
+      <div class="order-delta">+8.2%</div>
+      <div class="order-label">vs same period last month</div>
+    </div>
+    <div class="order-divider"></div>
+    <div class="order-metric">
+      <div class="card-label">Revenue</div>
+      <div class="order-value">$84.7K</div>
+      <div class="order-delta">+14.6%</div>
+      <div class="order-label">month to date</div>
+    </div>
+    <div class="order-divider"></div>
+    <div class="order-metric">
+      <div class="card-label">Avg Order Value</div>
+      <div class="order-value">$65.90</div>
+      <div class="order-delta negative">-2.1%</div>
+      <div class="order-label">down from $67.30</div>
+    </div>
+  </div>
+
+  <!-- Widget 8: Recent Activity -->
+  <div class="card widget-activity">
+    <div class="card-label">Recent Activity</div>
+    <div class="activity-item">
+      <span class="activity-dot shipped"></span>
+      <div>
+        <div class="activity-text">Moderna unit shipped to Austin, TX</div>
+        <div class="activity-time">2 hours ago</div>
+      </div>
+    </div>
+    <div class="activity-item">
+      <span class="activity-dot pending"></span>
+      <div>
+        <div class="activity-text">Filter subscription renewal pending</div>
+        <div class="activity-time">5 hours ago</div>
+      </div>
+    </div>
+    <div class="activity-item">
+      <span class="activity-dot shipped"></span>
+      <div>
+        <div class="activity-text">Altitude unit delivered to Seattle, WA</div>
+        <div class="activity-time">Yesterday</div>
+      </div>
+    </div>
+    <div class="activity-item">
+      <span class="activity-dot returned"></span>
+      <div>
+        <div class="activity-text">Return initiated — wrong color</div>
+        <div class="activity-time">2 days ago</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Widget 9: Token Key (2-col) -->
+  <div class="card widget-tokens">
+    <div class="card-label">Design Tokens</div>
+    <div class="token-swatches">
+      <div class="swatch" style="background:#F5F6F6" data-name="bg"></div>
+      <div class="swatch" style="background:#FFFFFF;border-color:#D5D8DA" data-name="surface"></div>
+      <div class="swatch" style="background:#0E2130" data-name="navy"></div>
+      <div class="swatch" style="background:#3C69B1" data-name="accent"></div>
+      <div class="swatch" style="background:#6FCFEB" data-name="teal"></div>
+      <div class="swatch" style="background:#202223" data-name="text"></div>
+      <div class="swatch" style="background:#1B9500" data-name="ok"></div>
+      <div class="swatch" style="background:#C48A00" data-name="warn"></div>
+      <div class="swatch" style="background:#D3002F" data-name="err"></div>
+    </div>
+    <div class="token-types">
+      <div class="type-sample">
+        <span class="type-sample-label">Display</span>
+        <span class="type-sample-display">Aa Brio</span>
+      </div>
+      <div class="type-sample">
+        <span class="type-sample-label">Body</span>
+        <span class="type-sample-body">Clean, filtered water</span>
+      </div>
+      <div class="type-sample">
+        <span class="type-sample-label">Mono</span>
+        <span class="type-sample-mono">BPOUROSC-001</span>
+      </div>
+    </div>
+    <div class="token-spacing">
+      <span class="spacing-block" style="width:2px"></span>
+      <span class="spacing-block" style="width:4px"></span>
+      <span class="spacing-block" style="width:8px"></span>
+      <span class="spacing-block" style="width:16px"></span>
+      <span class="spacing-block" style="width:24px"></span>
+      <span class="spacing-block" style="width:32px"></span>
+      <span class="spacing-label">2 · 4 · 8 · 16 · 24 · 32 px</span>
+    </div>
+  </div>
+
+  <!-- Widget 10: Shipping Progress -->
+  <div class="card widget-shipping">
+    <div class="card-label">Order #BRI-4821</div>
+    <div class="progress-track">
+      <div class="progress-fill" style="width: 65%"></div>
+    </div>
+    <div class="shipping-steps">
+      <span class="shipping-step done">Placed</span>
+      <span class="shipping-step done">Packed</span>
+      <span class="shipping-step current">Shipped</span>
+      <span class="shipping-step">Delivered</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- Floating Mode Toggle -->
+<div class="floating-bar">
+  <button class="mode-btn" data-mode="light" aria-label="Light mode">
+    <i class="ph ph-sun"></i> Light
+  </button>
+  <button class="mode-btn" data-mode="dark" aria-label="Dark mode">
+    <i class="ph ph-moon"></i> Dark
+  </button>
+</div>
+
+<script>
+// Mode toggle
+document.querySelectorAll('.mode-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.documentElement.dataset.theme = btn.dataset.mode;
+    document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+document.querySelector(`.mode-btn[data-mode="${document.documentElement.dataset.theme}"]`)?.classList.add('active');
+
+// Disable anchors
+document.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', e => e.preventDefault());
+});
+
+// Sparkline bars
+const sparkData = [320, 280, 410, 350, 290, 180, 250];
+const maxSpark = Math.max(...sparkData);
+const sparkRow = document.getElementById('sparkline');
+sparkData.forEach(v => {
+  const bar = document.createElement('div');
+  bar.className = 'spark-bar';
+  bar.style.height = (v / maxSpark * 100) + '%';
+  sparkRow.appendChild(bar);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Shopify Theme Dev"
+  short_description: "Edit and QA Shopify theme code"
+  default_prompt: "Use $shopify-theme-dev to modify this Shopify theme safely and verify the storefront behavior."
+
+policy:
+  allow_implicit_invocation: true

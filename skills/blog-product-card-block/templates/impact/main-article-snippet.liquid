@@ -1,0 +1,40 @@
+{% comment %}
+  =====================================================================
+  在 sections/main-article.liquid（或类似 OS 2.0 主题渲染 article 的 section）
+  顶部已有的 {%- assign ... -%} 块之后，插入下面这段 liquid。
+  注意：block.type 用 'product_card'（与 schema 中的 type 对应）。
+
+  插入后再把 section 渲染处的 {{ article.content }} 改为
+  {{ article_content_rendered }}。
+  =====================================================================
+{% endcomment %}
+
+{%- liquid
+  assign article_content_rendered = article.content
+  assign has_product_card = false
+
+  for block in section.blocks
+    if block.type == 'product_card'
+      assign has_product_card = true
+      assign placeholder_id = block.settings.placeholder_id | strip
+      if placeholder_id == blank
+        continue
+      endif
+
+      capture bpc_card_html
+        render 'blog-product-card-inline', block: block
+      endcapture
+
+      assign bpc_token = '[product-card:' | append: placeholder_id | append: ']'
+
+      assign needle_p = '<p>' | append: bpc_token | append: '</p>'
+      assign article_content_rendered = article_content_rendered | replace: needle_p, bpc_card_html
+
+      assign article_content_rendered = article_content_rendered | replace: bpc_token, bpc_card_html
+    endif
+  endfor
+-%}
+
+{%- if has_product_card -%}
+  {{ 'blog-product-card.css' | asset_url | stylesheet_tag }}
+{%- endif -%}

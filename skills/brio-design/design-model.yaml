@@ -1,0 +1,238 @@
+name: "Brio"
+philosophy: "Deep-water composure. A clean surface that lets the product breathe — navy anchors, sky accents, and the quiet confidence of a brand that knows water better than anyone."
+primary_mode: "light"
+brand_domain: "water coolers / hydration appliances"
+brand_type: "content-rich"
+mono_for_code: false
+mono_for_metrics: false
+
+primitives:
+  colors:
+    neutral:
+      50: "#F5F6F6"
+      100: "#EBECEC"
+      200: "#D5D8DA"
+      300: "#C5C8D1"
+      400: "#9EA3AA"
+      500: "#6D7175"
+      600: "#55585C"
+      700: "#3B3D41"
+      800: "#202223"
+      900: "#141516"
+      950: "#0B0C0C"
+    brand:
+      50: "#E8F0F8"
+      100: "#C5D9EE"
+      200: "#8FB8DE"
+      300: "#6FCFEB"
+      400: "#439FDB"
+      500: "#0E2130"
+      600: "#0B1A26"
+      700: "#08131C"
+      800: "#060D14"
+      900: "#04080A"
+      950: "#020405"
+    blue:
+      50: "#EBF2FA"
+      100: "#C5D9EE"
+      200: "#8FB8DE"
+      300: "#6FCFEB"
+      400: "#439FDB"
+      500: "#3C69B1"
+      600: "#2F548E"
+      700: "#223F6B"
+      800: "#182D4A"
+      900: "#0E1B29"
+      950: "#070E15"
+    teal:
+      50: "#E6F7F6"
+      100: "#B3EAE7"
+      200: "#80DDD8"
+      300: "#6FCFEB"
+      400: "#3DC4BC"
+      500: "#088F87"
+      600: "#06726C"
+      700: "#055651"
+      800: "#033A37"
+      900: "#021E1C"
+      950: "#010F0E"
+    red:
+      50: "#FDE8E8"
+      500: "#D3002F"
+      900: "#5C0014"
+    green:
+      50: "#E8F8E8"
+      500: "#1B9500"
+      900: "#0D4A00"
+    amber:
+      50: "#FFF8E8"
+      500: "#C48A00"
+      900: "#5C3F00"
+  spacing: [0, 2, 4, 6, 8, 12, 16, 20, 24, 32, 40, 48, 64, 96]
+  radii: [0, 2, 4, 16, 20, 999]
+
+tokens:
+  colors:
+    light:
+      background: "{neutral.50}"
+      surface1: "#FFFFFF"
+      surface2: "{neutral.100}"
+      surface3: "{neutral.200}"
+      border: "{neutral.200}"
+      border_visible: "{neutral.300}"
+      text1: "{neutral.800}"
+      text2: "{neutral.500}"
+      text3: "{neutral.400}"
+      text4: "{neutral.300}"
+      accent: "{blue.500}"
+      accent_subtle: "{blue.50}"
+    dark:
+      background: "{brand.500}"
+      surface1: "{brand.600}"
+      surface2: "{brand.700}"
+      surface3: "{brand.800}"
+      border: "{brand.700}"
+      border_visible: "{brand.600}"
+      text1: "{neutral.50}"
+      text2: "{neutral.400}"
+      text3: "{neutral.500}"
+      text4: "{neutral.300}"
+      accent: "{teal.300}"
+      accent_subtle: "{brand.700}"
+    success: "{green.500}"
+    warning: "{amber.500}"
+    error: "{red.500}"
+
+  spacing:
+    2xs: 2
+    xs: 4
+    sm: 8
+    md: 16
+    lg: 24
+    xl: 32
+    2xl: 48
+    3xl: 64
+    4xl: 96
+
+  radii:
+    element: 2
+    control: 4
+    component: 16
+    container: 20
+    pill: 999
+
+  typography:
+    display: { family: "Inter", size: "48px", weight: 700, line_height: 1.1 }
+    body: { family: "Inter", size: "15px", weight: 400, line_height: 1.6 }
+    mono: { family: "JetBrains Mono", size: "13px", weight: 400 }
+
+  elevation:
+    strategy: "flat"
+
+  motion:
+    personality: "smooth"
+    easing: "ease-in-out"
+    duration_fast: "150ms"
+    duration_normal: "300ms"
+
+  hero_stage:
+    preset: "editorial-photo"
+    observed_style:
+      description: "Full-bleed product photography on clean white or deep navy backgrounds. Product is the hero — floating on pure white or staged against dark water tones. No decorative UI overlays."
+      where_used: ["hero", "product pages", "collection headers"]
+    background:
+      medium: "photo"
+      color_mode: "brand-tinted-neutral"
+      saturation: "flat"
+      light_source: "top"
+      falloff: "soft"
+      vignette: "off"
+      texture: "clean"
+      motion: "static"
+      intensity: "subtle"
+      safe_zone: "full-bleed"
+      color_palette: ["#0E2130", "#3C69B1", "#6FCFEB", "#F5F6F6", "#FFFFFF"]
+    hero:
+      subject: "photo-cutout"
+      placement: "center"
+      scale: "prominent"
+      tint: "none"
+    relation:
+      type: "flat"
+      bleed: 0
+    disclaimer: "Hero images use product photography placeholders. Replace with actual Brio product shots before shipping."
+
+  iconography:
+    observed_style:
+      description: "Minimal outline icons, thin stroke (~1.5px), rounded terminals. Functional and understated — icons support text, never replace it."
+      stroke_weight: "thin"
+      corner_treatment: "soft"
+      fill_style: "outline"
+      form_language: "geometric"
+      visual_density: "minimal"
+    fallback_kit:
+      name: "Phosphor"
+      weight: "thin"
+      match_score: "high"
+      match_reasoning: "Phosphor thin matches the observed thin stroke weight, rounded terminals, and minimal density. The geometric form aligns with Brio's functional aesthetic. Lucide would be second choice but its strokes are slightly heavier."
+      cdn: "https://unpkg.com/@phosphor-icons/web@2/src/thin/style.css"
+      icon_class_prefix: "ph thin ph-"
+    disclaimer: "Icons in the generated preview are a best-match fallback from the Phosphor kit. The brand's actual icons are proprietary and not redistributed with this skill."
+
+components:
+  button_primary:
+    source: "observed"
+    background: "{neutral.800}"
+    color: "#FFFFFF"
+    padding: "12px 24px"
+    radius: "{radii.control}"
+    font_weight: 400
+    font_size: "15px"
+    hover: { background: "{neutral.700}" }
+  button_secondary:
+    source: "observed"
+    background: "transparent"
+    color: "{neutral.800}"
+    border: "2px solid {neutral.800}"
+    padding: "10px 24px"
+    radius: "{radii.control}"
+    font_weight: 400
+    hover: { background: "{neutral.800}", color: "#FFFFFF" }
+  button_ghost:
+    source: "derived"
+    background: "transparent"
+    color: "{blue.500}"
+    padding: "8px 16px"
+    radius: "{radii.control}"
+    font_weight: 400
+    hover: { background: "{blue.50}" }
+  card_standard:
+    source: "observed"
+    background: "#FFFFFF"
+    border: "1px solid {neutral.200}"
+    radius: "{radii.component}"
+    padding: 24
+    shadow: "none"
+  input_text:
+    source: "derived"
+    background: "#FFFFFF"
+    border_default: "1px solid {neutral.200}"
+    border_focus: "2px solid {blue.500}"
+    border_error: "2px solid {red.500}"
+    radius: "{radii.control}"
+    height: 44
+    padding: "12px 16px"
+
+app_screen:
+  archetype: "list-detail"
+  frame: "browser"
+  frame_params:
+    url: "my.briowater.com/products"
+    title: "Brio — Water Coolers"
+  content_seed: "Product catalog for water coolers and dispensers"
+  required_tokens_checklist:
+    - "background, surface1, surface2, surface3, border, border_visible"
+    - "text1, text2, text3, text4"
+    - "accent, accent_subtle, success, warning, error"
+    - "all typography scale tokens"
+    - "all spacing tokens used in components"

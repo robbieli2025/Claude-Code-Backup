@@ -1,0 +1,7 @@
+interface:
+  display_name: "SEO GEO Content"
+  short_description: "Plan and write search-ready content"
+  default_prompt: "Use $seo-geo-content to write SEO and AI GEO optimized content for this page."
+
+policy:
+  allow_implicit_invocation: true

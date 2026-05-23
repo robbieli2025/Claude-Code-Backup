@@ -1,0 +1,78 @@
+{%- doc -%}
+  Renders a single blog product card. Theme-agnostic implementation:
+  doesn't rely on any theme-native price/badge snippet so the same code
+  can be reused across Shopify projects.
+
+  @param {object} block - The product_card block instance, with settings:
+                          - product
+                          - highlights
+                          - learn_more_label
+                          - atc_label
+{%- enddoc -%}
+
+{%- liquid
+  assign bpc_product = all_products[block.settings.product]
+-%}
+
+{%- if bpc_product != blank -%}
+  {%- assign bpc_variant = bpc_product.selected_or_first_available_variant -%}
+  {%- assign bpc_on_sale = false -%}
+  {%- if bpc_variant.compare_at_price > bpc_variant.price -%}
+    {%- assign bpc_on_sale = true -%}
+    {%- assign bpc_savings = bpc_variant.compare_at_price | minus: bpc_variant.price | times: 100.0 | divided_by: bpc_variant.compare_at_price | round -%}
+  {%- endif -%}
+
+  <div class="bpc-wrapper" {{ block.shopify_attributes }}>
+    <div class="bpc-card">
+      <div class="bpc-image">
+        <a href="{{ bpc_product.url }}">
+          <img
+            src="{{ bpc_product.featured_image | image_url: width: 440 }}"
+            alt="{{ bpc_product.featured_image.alt | escape }}"
+            width="220"
+            loading="lazy"
+          >
+        </a>
+      </div>
+
+      <div class="bpc-info">
+        <p class="bpc-title">{{ bpc_product.title }}</p>
+
+        {%- if block.settings.highlights != blank -%}
+          <p class="bpc-highlights">{{ block.settings.highlights }}</p>
+        {%- endif -%}
+
+        <div class="bpc-price">
+          <span class="bpc-price-current">{{ bpc_variant.price | money }}</span>
+
+          {%- if bpc_on_sale -%}
+            <span class="bpc-price-compare">{{ bpc_variant.compare_at_price | money }}</span>
+            <span class="bpc-savings-badge">Save {{ bpc_savings }}%</span>
+          {%- endif -%}
+        </div>
+
+        <div class="bpc-actions">
+          <a class="bpc-btn bpc-btn--outline" href="{{ bpc_product.url }}">
+            {{ block.settings.learn_more_label | default: 'Learn More' }}
+          </a>
+
+          <form action="{{ routes.cart_add_url }}" method="post" class="bpc-form">
+            <input type="hidden" name="id" value="{{ bpc_variant.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button
+              type="submit"
+              class="bpc-btn bpc-btn--solid"
+              {% unless bpc_variant.available %}disabled{% endunless %}
+            >
+              {%- if bpc_variant.available -%}
+                {{ block.settings.atc_label | default: 'Add to Cart' }}
+              {%- else -%}
+                Sold Out
+              {%- endif -%}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}

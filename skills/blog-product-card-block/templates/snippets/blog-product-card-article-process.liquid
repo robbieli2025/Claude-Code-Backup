@@ -1,0 +1,91 @@
+{%- doc -%}
+  预处理博客正文：剔除 RTE 误插入的 meta，并把占位符替换为产品卡 HTML。
+
+  @param {string} article_html - article.content
+
+  占位符写法（二选一）：
+  - 标准：[product-card:my-id]
+  - 简易（推荐富文本单独一段）：%%bpc:my-id%%
+
+  注意：Shopify Horizon 主题的 @theme 类型 block 在 section.blocks
+  运行时不携带 settings 数据，因此无法从 section.blocks 读取
+  placeholder_id 和 product。改为直接在 snippet 中硬编码
+  已知占位符 ID 对应的产品卡渲染。
+
+  新增占位符 ID 时，在 for/case 循环中添加 when 分支即可。
+{%- enddoc -%}
+
+{%- liquid
+  assign out = article_html
+
+  assign out = out | replace: '<meta charset="utf-8">', ''
+  assign out = out | replace: '<meta charset="UTF-8">', ''
+  assign out = out | replace: "<meta charset='utf-8'>", ''
+  assign out = out | replace: "<meta charset='UTF-8'>", ''
+  assign out = out | replace: '<meta charset=utf-8>', ''
+  assign out = out | replace: '<meta charset=UTF-8>', ''
+
+  assign bpc_product = all_products['{{PRODUCT_HANDLE}}']
+  assign bpc_variant = bpc_product.selected_or_first_available_variant
+  assign bpc_on_sale = false
+  if bpc_variant.compare_at_price > bpc_variant.price
+    assign bpc_on_sale = true
+    assign bpc_savings = bpc_variant.compare_at_price | minus: bpc_variant.price | times: 100.0 | divided_by: bpc_variant.compare_at_price | round
+  endif
+-%}
+
+{%- for bpc_id in (1..10) -%}
+  {%- case bpc_id -%}
+    {%- when 1 -%}
+      {%- assign pid = '{{PLACEHOLDER_ID_1}}' -%}
+      {%- assign highlights = '{{HIGHLIGHTS_1}}' -%}
+    {%- when 2 -%}
+      {%- assign pid = '{{PLACEHOLDER_ID_2}}' -%}
+      {%- assign highlights = '{{HIGHLIGHTS_2}}' -%}
+    {%- else -%}
+      {%- assign pid = '' -%}
+  {%- endcase -%}
+
+  {%- if pid == blank -%}
+    {%- break -%}
+  {%- endif -%}
+
+  {%- if bpc_product != blank -%}
+    {%- capture card_html -%}
+      <div class="bpc-wrapper"><div class="bpc-card"><div class="bpc-image"><a href="{{ bpc_product.url }}"><img src="{{ bpc_product.featured_image | image_url: width: 440 }}" alt="{{ bpc_product.featured_image.alt | escape }}" width="220" loading="lazy"></a></div><div class="bpc-info"><p class="bpc-title">{{ bpc_product.title }}</p>{%- if highlights != blank -%}<p class="bpc-highlights">{{ highlights }}</p>{%- endif -%}<div class="bpc-price"><span class="bpc-price-current">{{ bpc_variant.price | money }}</span>{%- if bpc_on_sale -%}<span class="bpc-price-compare">{{ bpc_variant.compare_at_price | money }}</span><span class="bpc-savings-badge">Save {{ bpc_savings }}%</span>{%- endif -%}</div><div class="bpc-actions"><a class="bpc-btn bpc-btn--outline" href="{{ bpc_product.url }}">Learn More</a><form action="{{ routes.cart_add_url }}" method="post" class="bpc-form"><input type="hidden" name="id" value="{{ bpc_variant.id }}"><input type="hidden" name="quantity" value="1"><button type="submit" class="bpc-btn bpc-btn--solid"{% unless bpc_variant.available %} disabled{% endunless %}>{%- if bpc_variant.available -%}Add to Cart{%- else -%}Sold Out{%- endif -%}</button></form></div></div></div></div>
+    {%- endcapture -%}
+  {%- else -%}
+    {%- assign card_html = '' -%}
+  {%- endif -%}
+
+  {%- liquid
+    assign t_bracket = '[product-card:' | append: pid | append: ']'
+    assign t_percent = '%%bpc:' | append: pid | append: '%%'
+
+    assign n = '<p><span>' | append: t_bracket | append: '</span></p>'
+    assign out = out | replace: n, card_html
+    assign n = '<span>' | append: t_bracket | append: '</span><br>'
+    assign out = out | replace: n, card_html
+    assign n = '<span>' | append: t_bracket | append: '</span><br />'
+    assign out = out | replace: n, card_html
+    assign n = '<span>' | append: t_bracket | append: '</span>'
+    assign out = out | replace: n, card_html
+    assign n = '<p>' | append: t_bracket | append: '</p>'
+    assign out = out | replace: n, card_html
+    assign out = out | replace: t_bracket, card_html
+
+    assign n = '<p><span>' | append: t_percent | append: '</span></p>'
+    assign out = out | replace: n, card_html
+    assign n = '<span>' | append: t_percent | append: '</span><br>'
+    assign out = out | replace: n, card_html
+    assign n = '<span>' | append: t_percent | append: '</span><br />'
+    assign out = out | replace: n, card_html
+    assign n = '<span>' | append: t_percent | append: '</span>'
+    assign out = out | replace: n, card_html
+    assign n = '<p>' | append: t_percent | append: '</p>'
+    assign out = out | replace: n, card_html
+    assign out = out | replace: t_percent, card_html
+  -%}
+{%- endfor -%}
+
+{{- out -}}

@@ -17,7 +17,7 @@
 - [Horizon BPC Pitfall](neobay-horizon-bpc-pitfall.md) — Horizon主题section.blocks不携带settings，blog产品卡必须硬编码映射
 - [Shopify Token Auto Refresh](shopify-token-auto-refresh.md) — Shopify Partner App 24h token 自动刷新标准，所有项目通用
 - [Neobay .env 保护](neobay-env-protection.md) — .env 文件不得清空或删除，存放所有 API 凭证
-- [Neobay Blog Article UI](neobay-blog-article-ui.md) — Blog文章页两列布局+TOC(仅H2)+Related+Product CTA+进度条，TOC必须JS生成
+- [Neobay Blog UI](neobay-blog-article-ui.md) — Blog改造全貌：列表页布局+文章页两列+TOC+Related+首页聚合section+产品卡
 
 # Crossborder Selection
 

@@ -10,6 +10,6 @@
     "ANTHROPIC_DEFAULT_SONNET_MODEL_NAME": "deepseek-v4-pro"
   },
   "model": "opus",
-  "effortLevel": "xhigh",
+  "effortLevel": "high",
   "theme": "auto"
 }

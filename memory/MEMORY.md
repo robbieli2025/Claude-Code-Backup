@@ -10,7 +10,8 @@
 
 # Neobay Project
 
-- [Neobay Core Selling Points](neobay-selling-points.md) — Neobay Pet 猫用雾化舱核心差异化卖点
+- [Neobay Core Selling Points](neobay-selling-points.md) — Comfort Feeder唯一硬件差异化（AeroKat没有），Flow Indicator非差异（AeroKat发明）
+- [Neobay Video Storyboard](neobay-video-storyboard-diagnosis.md) — 视频诊断+Meta/PDP分镜重规划飞书文档，含3版Meta分镜+75秒PDP分镜+AI Prompt
 - [Neobay Content Strategy](neobay-content-strategy.md) — 全盘内容战略：5大Topic Cluster架构、内链策略、AI GEO原则、竞品差异化（具体排期见 planning doc）
 - [Neobay Blog Plan May 2026](neobay-blog-plan-may2026.md) — 5月12篇+追加5篇，全部完成 ✅（含 #1 重写）
 - [Neobay Blog Plan Jun-Nov 2026](neobay-blog-plan-jun-nov-2026.md) — 6-11月50篇Blog规划，整合Reddit+Google+YouTube+Amazon全渠道调研，6月8篇/之后每月8篇，2026-05-17 Amazon评论分析后替换3篇
@@ -45,3 +46,7 @@
 # 横纵分析法
 
 - [横纵分析报告输出路径](hv-analysis-output-rule.md) — 报告统一输出到 ~/Documents/深度分析报告-横纵分析法/
+
+# Claude Code Infrastructure
+
+- [Backup Sync Setup](claude-code-backup-sync.md) — 记忆/配置 symlink 到 GitHub 备份仓库，多电脑同步方案+新机器初始化步骤

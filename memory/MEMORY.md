@@ -12,12 +12,15 @@
 
 - [Neobay Core Selling Points](neobay-selling-points.md) — Neobay Pet 猫用雾化舱核心差异化卖点
 - [Neobay Content Strategy](neobay-content-strategy.md) — 全盘内容战略：5大Topic Cluster架构、内链策略、AI GEO原则、竞品差异化（具体排期见 planning doc）
-- [Neobay Blog Plan May 2026](neobay-blog-plan-may2026.md) — 5月12篇Blog规划及完成进度（12/12 已完成 ✅ Phase 1 完结）
+- [Neobay Blog Plan May 2026](neobay-blog-plan-may2026.md) — 5月12篇+追加5篇，全部完成 ✅（含 #1 重写）
 - [Neobay Blog Plan Jun-Nov 2026](neobay-blog-plan-jun-nov-2026.md) — 6-11月50篇Blog规划，整合Reddit+Google+YouTube+Amazon全渠道调研，6月8篇/之后每月8篇，2026-05-17 Amazon评论分析后替换3篇
 - [Horizon BPC Pitfall](neobay-horizon-bpc-pitfall.md) — Horizon主题section.blocks不携带settings，blog产品卡必须硬编码映射
 - [Shopify Token Auto Refresh](shopify-token-auto-refresh.md) — Shopify Partner App 24h token 自动刷新标准，所有项目通用
 - [Neobay .env 保护](neobay-env-protection.md) — .env 文件不得清空或删除，存放所有 API 凭证
 - [Neobay Blog UI](neobay-blog-article-ui.md) — Blog改造全貌：列表页布局+文章页两列+TOC+Related+首页聚合section+产品卡
+- [Blog Publishing Standards](feedback-blog-publishing-standards.md) — Blog 发布硬标准：HTML格式、图片约束、产品卡dropcap排除，一次性到位
+- [LinkFox AI 生图 API](neobay-linkfox-api.md) — LinkFox @AI绘图 API 正确用法：endpoint/参数/polling/图片提取
+- [Blog 优化计划](neobay-blog-optimization-plan.md) — 现有文章优化清单（Tier1重写4篇/Tier2补内容6篇/Tier3小修3篇+批量修复），每天1篇
 
 # Crossborder Selection
 
